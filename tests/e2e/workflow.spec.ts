@@ -144,3 +144,16 @@ test('explains when no maximum can be shown because the metric differs from the 
   await page.goto('/#/case/demo-hn-001/oars');
   await expect(page.getByTestId('needs-hn1-cordprv')).toContainText('D0.1cc, Dmax');
 });
+
+test('OAR Data: a metric row can be removed, and reference metrics appear as empty rows', async ({ page }) => {
+  await fresh(page);
+  await page.goto('/#/case/demo-hn-001/oars');
+  // Reference-needed rows are offered even though only D0.03cc was entered
+  await expect(page.getByLabel(/^Spinal cord PRV Dmax Course 1/).first()).toBeVisible();
+  await expect(page.getByLabel(/^Spinal cord PRV D0.1cc Course 1/).first()).toBeVisible();
+  page.once('dialog', (d) => d.accept());
+  await page.getByRole('button', { name: 'Remove D0.03cc row for Spinal cord PRV' }).click();
+  await expect(page.getByLabel(/^Spinal cord PRV D0.03cc Course 1/)).toHaveCount(0);
+  await page.reload();
+  await expect(page.getByLabel(/^Spinal cord PRV D0.03cc Course 1/)).toHaveCount(0);
+});

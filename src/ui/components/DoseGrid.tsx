@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { canonicalMetric, type DoseEntry, type Oar, type ReviewCase } from '../../engine';
 import { upsertDose } from '../../domain/factory';
 import { pathwayByKey } from '../../domain/templates';
+import { referenceMetrics } from '../maxHint';
 import { NumInput } from './Inputs';
 
 /** Metric rows × phase columns for one OAR. `columns` decides whether prior phases, the proposed plan, or both are editable. */
@@ -22,7 +23,19 @@ export function DoseGrid({
   const [newMetric, setNewMetric] = useState('');
   const all: DoseEntry[] = [...c.courses.flatMap((co) => co.phases.flatMap((p) => p.doses)), ...c.proposed.doses].filter((d) => d.oarId === oar.id);
   const defaultMetric = pathwayByKey(c.pathway)?.oars.find((t) => t.organKey === oar.organKey)?.defaultMetric;
-  const metrics = Array.from(new Set([...(defaultMetric ? [defaultMetric] : []), ...all.map((d) => d.metric)]));
+  // Rows: metrics the selected references use (so the user knows what to enter) + metrics already entered.
+  // The template default is only a fallback when neither exists.
+  const needed = referenceMetrics(c, oar);
+  const enteredMetrics = all.map((d) => d.metric);
+  const fallback = needed.length === 0 && enteredMetrics.length === 0 && defaultMetric ? [defaultMetric] : [];
+  const metrics = Array.from(new Set([...needed, ...enteredMetrics, ...fallback]));
+  const removeMetric = (m: string) => {
+    if (!confirm(`Remove the ${m} row for ${oar.name}? Its values are deleted from all previous courses and the new plan.`)) return;
+    update((d) => {
+      d.courses.forEach((co) => co.phases.forEach((p) => (p.doses = p.doses.filter((x) => !(x.oarId === oar.id && x.metric === m)))));
+      d.proposed.doses = d.proposed.doses.filter((x) => !(x.oarId === oar.id && x.metric === m));
+    });
+  };
   // Previous-course columns are always shown; on the Proposed Plan step they are read-only context.
   const showPrior = true;
   const priorEditable = columns !== 'proposed';
@@ -60,6 +73,14 @@ export function DoseGrid({
             <tr key={m}>
               <td className="mono">
                 {m} <span className="muted">({unitFor(m)})</span>
+                {needed.includes(m) && <div className="tag ok" title="A selected reference sets a limit on this metric">used by reference</div>}
+                {priorEditable && enteredMetrics.includes(m) && (
+                  <div>
+                    <button className="link small" aria-label={`Remove ${m} row for ${oar.name}`} onClick={() => removeMetric(m)}>
+                      remove row
+                    </button>
+                  </div>
+                )}
               </td>
               {showPrior &&
                 c.courses.flatMap((co, ci) =>
