@@ -1,5 +1,7 @@
 # ReRT Workbench
 
+**▶ Open the tool: https://osamafouad.github.io/rert-workbench/** (no install or account needed)
+
 An interactive, evidence-linked **reirradiation organ-at-risk (OAR) dose-review** tool.
 It is a **research and educational prototype**, and it works with **fictional cases only**.
 
