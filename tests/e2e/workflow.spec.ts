@@ -106,3 +106,15 @@ test('Arabic glossary is right-to-left', async ({ page }) => {
   await expect(root).toContainText('الجرعة الفعّالة بيولوجيًا');
   await expect(root).toContainText('تتطلب مراجعة');
 });
+
+test('disclaimer banner can be hidden and stays hidden after reload', async ({ page }) => {
+  await fresh(page);
+  const banner = page.getByRole('note').filter({ hasText: 'Not a medical device' });
+  await expect(banner).toBeVisible();
+  await page.getByRole('button', { name: 'Hide this notice' }).click();
+  await expect(banner).toHaveCount(0);
+  await page.reload();
+  await expect(page.getByRole('heading', { name: 'Cases' })).toBeVisible();
+  await expect(banner).toHaveCount(0);
+  await expect(page.locator('footer')).toContainText('not validated for clinical use');
+});
