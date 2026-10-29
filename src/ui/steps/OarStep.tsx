@@ -21,6 +21,9 @@ export function OarStep({ c, update }: StepProps) {
   return (
     <>
       <div className="callout">
+        <b>This step is for the previous course(s) only.</b> Doses from the new (proposed) plan are entered in step 5, Proposed Plan,
+        where these previous values are shown again for reference.
+        <br />
         Enter the dose <b>received by each OAR</b> per phase (from the plan DVH), not the target prescription. Template organs are
         suggestions only; a template organ does not imply a validated reirradiation constraint exists. Near-maximum doses are summed
         across courses only when you document the spatial basis below.

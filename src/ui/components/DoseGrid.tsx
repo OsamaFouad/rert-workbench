@@ -10,17 +10,22 @@ export function DoseGrid({
   oar,
   update,
   columns,
+  ceilings,
 }: {
   c: ReviewCase;
   oar: Oar;
   update: (fn: (d: ReviewCase) => void) => void;
   columns: 'prior' | 'proposed' | 'all';
+  /** Calculated headroom per metric (shown under the new-plan input; never filled in automatically). */
+  ceilings?: Record<string, { label: string; doseGy: number; fractions: number }[]>;
 }) {
   const [newMetric, setNewMetric] = useState('');
   const all: DoseEntry[] = [...c.courses.flatMap((co) => co.phases.flatMap((p) => p.doses)), ...c.proposed.doses].filter((d) => d.oarId === oar.id);
   const defaultMetric = pathwayByKey(c.pathway)?.oars.find((t) => t.organKey === oar.organKey)?.defaultMetric;
   const metrics = Array.from(new Set([...(defaultMetric ? [defaultMetric] : []), ...all.map((d) => d.metric)]));
-  const showPrior = columns !== 'proposed';
+  // Previous-course columns are always shown; on the Proposed Plan step they are read-only context.
+  const showPrior = true;
+  const priorEditable = columns !== 'proposed';
   const showProposed = columns !== 'prior';
   const unitFor = (m: string): DoseEntry['unit'] => (/^V/.test(m) ? '%' : 'Gy');
   return (
@@ -33,14 +38,18 @@ export function DoseGrid({
               c.courses.flatMap((co) =>
                 co.phases.map((p) => (
                   <th key={p.id} className="num">
+                    {priorEditable ? '' : 'Previous: '}
                     {co.label} / {p.label}
-                    <div className="muted small">{p.fractions ? `${p.fractions} fx` : 'fx missing'}</div>
+                    <div className="muted small">
+                      {p.fractions ? `${p.fractions} fx` : 'fx missing'}
+                      {priorEditable ? '' : ' · from OAR Data'}
+                    </div>
                   </th>
                 )),
               )}
             {showProposed && (
-              <th className="num">
-                Proposed
+              <th className="num new-plan">
+                New plan dose (enter)
                 <div className="muted small">{c.proposed.fractions ? `${c.proposed.fractions} fx` : 'fx missing'}</div>
               </th>
             )}
@@ -56,21 +65,34 @@ export function DoseGrid({
                 c.courses.flatMap((co, ci) =>
                   co.phases.map((p, pi) => (
                     <td key={p.id} className="num">
+                      {!priorEditable ? (
+                        <span className="muted">{p.doses.find((d) => d.oarId === oar.id && d.metric === m)?.value ?? '—'}</span>
+                      ) : (
                       <NumInput
                         label={`${oar.name} ${m} ${co.label} ${p.label}`}
                         value={p.doses.find((d) => d.oarId === oar.id && d.metric === m)?.value ?? null}
                         onChange={(v) => update((d) => void (d.courses[ci].phases[pi].doses = upsertDose(d.courses[ci].phases[pi].doses, oar.id, m, v, unitFor(m))))}
                       />
+                      )}
                     </td>
                   )),
                 )}
               {showProposed && (
-                <td className="num">
+                <td className="num new-plan">
                   <NumInput
                     label={`${oar.name} ${m} proposed`}
                     value={c.proposed.doses.find((d) => d.oarId === oar.id && d.metric === m)?.value ?? null}
                     onChange={(v) => update((d) => void (d.proposed.doses = upsertDose(d.proposed.doses, oar.id, m, v, unitFor(m))))}
                   />
+                  {ceilings?.[m]?.length ? (
+                    <div className="small muted ceiling" data-testid={`ceiling-${oar.id}-${m}`} title="Calculated headroom under selected assumptions — not a prescribed or guaranteed-safe dose">
+                      {ceilings[m].map((x) => (
+                        <div key={x.label}>
+                          {x.doseGy > 0 ? `≤ ${x.doseGy.toFixed(2)} Gy` : 'no headroom'} · {x.label}
+                        </div>
+                      ))}
+                    </div>
+                  ) : null}
                 </td>
               )}
             </tr>

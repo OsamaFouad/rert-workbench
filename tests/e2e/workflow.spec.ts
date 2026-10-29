@@ -118,3 +118,14 @@ test('disclaimer banner can be hidden and stays hidden after reload', async ({ p
   await expect(banner).toHaveCount(0);
   await expect(page.locator('footer')).toContainText('not validated for clinical use');
 });
+
+test('Proposed Plan shows previous doses read-only next to the new-plan inputs', async ({ page }) => {
+  await fresh(page);
+  await page.goto('/#/case/demo-br-001/proposed');
+  await expect(page.getByText('step 3 (OAR Data) holds the previous courses only', { exact: false })).toBeVisible();
+  await expect(page.locator('th', { hasText: 'Previous: Course 1' }).first()).toBeVisible();
+  await expect(page.locator('td', { hasText: /^52$/ }).first()).toBeVisible();
+  await expect(page.getByLabel('Brainstem Dmax proposed')).toHaveValue('18');
+  // Calculated headroom hint next to the input (LeCompte 2025: 100 − 52 = 48 Gy physical)
+  await expect(page.getByTestId('ceiling-br1-bs-Dmax')).toContainText('48.00 Gy');
+});
