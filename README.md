@@ -24,7 +24,7 @@ It is a **research and educational prototype**, and it works with **fictional ca
 Requires Node.js ≥ 20 (tested with 22).
 ```bash
 npm ci
-npm run dev          # http://localhost:5173
+npm run dev          # http://127.0.0.1:5173
 npm test             # unit tests (engine, dataset integrity, demo oracles)
 npm run test:e2e     # Playwright end-to-end (uses installed Chrome locally; set PW_CHANNEL= to use Playwright Chromium)
 npm run build        # static site in dist/

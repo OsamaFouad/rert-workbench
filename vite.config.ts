@@ -10,6 +10,8 @@ export default defineConfig({
   base: process.env.BASE_PATH ?? './',
   plugins: [react()],
   build: { chunkSizeWarningLimit: 1500 },
+  // Bind IPv4 explicitly: Safari may fail to reach a dev server bound only to ::1.
+  server: { host: '127.0.0.1', port: 5173 },
   define: { __APP_VERSION__: JSON.stringify(pkg.version) },
   test: { include: ['tests/unit/**/*.test.ts'], environment: 'node' },
 });
