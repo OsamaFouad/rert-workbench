@@ -1,0 +1,80 @@
+[
+ {
+  "id": "niyazi-eud-2013-recovery-1",
+  "sourceKey": "niyazi-eud-2013",
+  "location": "Methods - Cumulative EUD and recovery; Table 3 'Corrected sum'",
+  "organ": "CNS (optic chiasm, optic nerves, brainstem, brain)",
+  "setting": "Recurrent malignant glioma re-irradiation; interval generally >6 months",
+  "maxPriorCourses": 1,
+  "intervalRule": "Uniform empiric recovery factor r = 0.5 applied to the primary-course dose regardless of interval (descriptive analysis, not a validated planning rule)",
+  "factorTable": [
+   {
+    "intervalMonthsMin": null,
+    "intervalMonthsMax": null,
+    "retainedFraction": 0.5
+   }
+  ],
+  "appliesTo": "unspecified",
+  "quote": "an empiric recovery factor of r = 0.5 for the primary radiation dose was introduced which should account for repair of normal CNS tissue; this uniform value was rather an approximation and simplification",
+  "extractionStatus": "verified-fulltext",
+  "notes": "Applied to EUD and maximum dose values (Gy), not to EQD2/BED explicitly. intervalMonthsMin is null because the factor was applied irrespective of interval (cohort interval >= 5.8 months). Authors state optic system and other CNS tissues likely differ in recovery."
+ },
+ {
+  "id": "evolving-reirt-brain-2023-recovery-1",
+  "sourceKey": "evolving-reirt-brain-2023",
+  "location": "Section 'Normal tissue tolerance' (citing Ang et al. 2001, rhesus monkey spinal cord)",
+  "organ": "spinal-cord (authors extrapolate to brain)",
+  "setting": "Experimental primate spinal cord data, cited in brain reirradiation review",
+  "maxPriorCourses": 1,
+  "intervalRule": "estimated recovery of occult injury after a first course of RT around 50% at 1 year, 60% at 2 years, and 65–70% at 3 years or more",
+  "factorTable": [
+   {
+    "intervalMonthsMin": 12,
+    "intervalMonthsMax": 24,
+    "retainedFraction": 0.5
+   },
+   {
+    "intervalMonthsMin": 24,
+    "intervalMonthsMax": 36,
+    "retainedFraction": 0.4
+   },
+   {
+    "intervalMonthsMin": 36,
+    "intervalMonthsMax": null,
+    "retainedFraction": 0.35
+   }
+  ],
+  "appliesTo": "unspecified",
+  "quote": "the authors suggested to use an estimated recovery of occult injury after a first course of RT around 50% at 1 year, 60% at 2 years, and 65–70% at 3 years or more, for the reirradiation of selected patients",
+  "extractionStatus": "verified-fulltext",
+  "notes": "retainedFraction DERIVED as 1 - stated recovery; for >=3 years the conservative end (65% recovery -> 0.35 retained) is used, the stated range is 65-70%. Source data are spinal cord (secondary citation of Ang 2001); the review states brain recovery is 'assumed to be like' spinal cord. Interval bins between the stated time points are my interpretation (value at 1 y applied from 12-24 months, etc.) - treat with caution; no value given for <12 months."
+ },
+ {
+  "id": "sminia-mayer-2012-recovery-1",
+  "sourceKey": "sminia-mayer-2012",
+  "location": "Section 3.2 Time interval",
+  "organ": "brain",
+  "setting": "Recurrent glioma re-irradiation, intervals 3-55 months",
+  "maxPriorCourses": 1,
+  "intervalRule": "No correlation between interval (3-55 months) and re-irradiation tolerance; authors suggest relatively fast partial long-term recovery (months rather than years). No quantitative factors.",
+  "factorTable": null,
+  "appliesTo": "EQD2",
+  "quote": "These observations suggest a relatively fast process of (partial) long-term recovery, in the order of months rather than of years.",
+  "extractionStatus": "verified-fulltext",
+  "notes": "Qualitative only."
+ },
+ {
+  "id": "estro-cns-2026-interval-1",
+  "sourceKey": "estro-cns-2026",
+  "location": "Section 1 Introduction",
+  "organ": "brain (glioblastoma reirradiation)",
+  "setting": "Recurrent glioblastoma; minimum interval recommendation",
+  "maxPriorCourses": null,
+  "intervalRule": "Reirradiation should be considered at least 6 months after the first course of RT (glioblastoma); optic nerves/chiasm have limited recovery regardless of interval. No retained-dose factors.",
+  "factorTable": null,
+  "appliesTo": "unspecified",
+  "quote": "According to international recommendations and prognostic scores for glioblastoma patients, reirradiation should be considered at least 6 months after the first course of RT [6].",
+  "extractionStatus": "verified-fulltext",
+  "notes": "Patient-selection interval, not a dose-discount model."
+ }
+]

@@ -1,0 +1,11 @@
+node_modules/
+dist/
+.fulltext-cache/
+test-results/
+playwright-report/
+.DS_Store
+*.log
+# User-entered case data must never be committed
+*.rert.json
+rert-cases-*.json
+cases/

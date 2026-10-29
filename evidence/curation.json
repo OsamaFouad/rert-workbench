@@ -1,0 +1,105 @@
+{
+  "datasetVersion": "1.0.0",
+  "searchDate": "2026-10-29",
+  "description": "Evidence dataset v1.0.0. Extracted 2026-10-29 from open-access full text only. Every enabled numeric record has a verbatim quote machine-matched against the downloaded full text (scripts/verify-quotes.mjs). Paywalled or abstract-only sources are listed with no numbers. Coverage is NOT exhaustive. Not independently validated by a clinician or medical physicist.",
+  "regionsByExtractionDir": { "brain": ["brain"], "hn": ["head-neck"], "general": ["general"] },
+  "organKeyMap": {
+    "optic-apparatus": ["optic-chiasm", "optic-nerve"],
+    "neurological-OARs": ["neurological-oars"],
+    "any-OAR": ["any-oar"]
+  },
+  "diseaseScopeBySource": {
+    "ependymoma-reirt-2026": ["ependymoma"],
+    "estro-cns-2026": ["glioblastoma", "high-grade-glioma", "low-grade-glioma", "meningioma", "brain-metastases", "ependymoma", "paediatric-cns"],
+    "evolving-reirt-brain-2023": ["glioblastoma"],
+    "hgg-frac-reirt-2025": ["glioblastoma", "high-grade-glioma"],
+    "mayer-sminia-2008": ["glioblastoma", "high-grade-glioma", "low-grade-glioma"],
+    "mcgovern-prro-2023": ["glioblastoma", "high-grade-glioma", "low-grade-glioma", "meningioma", "brain-metastases", "ependymoma", "paediatric-cns"],
+    "meningioma-tmprt-2026": ["meningioma"],
+    "minniti-gbm-reirt-2021": ["glioblastoma"],
+    "niyazi-eud-2013": ["glioblastoma", "high-grade-glioma"],
+    "peds-proton-brainstem-2026": ["paediatric-cns"],
+    "pentec-reirt-2024": ["paediatric-cns"],
+    "sminia-mayer-2012": ["glioblastoma", "high-grade-glioma", "low-grade-glioma"],
+    "stiefel-2021": ["glioblastoma", "high-grade-glioma", "low-grade-glioma", "meningioma", "brain-metastases", "ependymoma", "paediatric-cns"],
+    "waxweiler-pbc-2017": ["paediatric-cns"],
+    "estro-eano-gbm-2025": ["glioblastoma"],
+    "feng-2025-tcda-preprint": ["any"],
+    "paradis-2019-consult-appendixE2": ["any"],
+    "bots-2017-hn-reirr": ["hnscc"],
+    "dale-2017-carotid-particle": ["hnscc", "other"],
+    "embring-2021-cumdose": ["hnscc"],
+    "garg-2016-hn-reirr": ["hnscc"],
+    "gebhardt-2018-carotid-sbrt": ["hnscc"],
+    "guan-2024-npc-imrt-tli": ["nasopharyngeal-carcinoma"],
+    "guan-2026-npc-cirt-tli": ["nasopharyngeal-carcinoma"],
+    "hague-2024-bjrcr": ["hnscc"],
+    "held-2019-cirt-oar": ["hnscc", "other"],
+    "ho-2020-npc-sbrt-hyperarc": ["nasopharyngeal-carcinoma"],
+    "lin-2024-npc-failure-patterns": ["nasopharyngeal-carcinoma"],
+    "nanda-2025-hnscc-pet-reirr": ["hnscc"],
+    "nash-2025-cord-brainstem-audit": ["hnscc"],
+    "tan-2025-npc-dwi-dosepaint": ["nasopharyngeal-carcinoma"],
+    "nieder-2005-cord": ["any"],
+    "nieder-2006-cord": ["any"],
+    "kirkpatrick-2010-quantec-cord": ["any"],
+    "dibs-2025-bp-reirr": ["hnscc"],
+    "liu-2014-npc-tli": ["nasopharyngeal-carcinoma"]
+  },
+  "constraintOverrides": {
+    "hgg-frac-reirt-2025-brainstem-1": {
+      "physicalSumDefinedBySource": true,
+      "_why": "Source: 'cumulative maximum potential reirradiation point dose of 100 Gy' (simple summed point dose, no α/β)."
+    },
+    "hgg-frac-reirt-2025-optic-nerve-1": {
+      "inequality": "<=",
+      "conditionText": "Applies when the optic nerves/chiasm previously received a dose near standard tolerance (50–54 Gy).",
+      "_why": "Source wording 'typical maximum point dose accepted ... would be 24 Gy' read as an upper limit (≤)."
+    },
+    "hgg-frac-reirt-2025-optic-chiasm-1": {
+      "inequality": "<=",
+      "conditionText": "Applies when the optic nerves/chiasm previously received a dose near standard tolerance (50–54 Gy).",
+      "_why": "As above."
+    },
+    "peds-proton-brainstem-2026-brainstem-1": { "automatedEvaluation": false, "_why": "Gy(RBE) proton cumulative values; not compared automatically with photon doses." },
+    "peds-proton-brainstem-2026-brainstem-2": { "automatedEvaluation": false, "_why": "Gy(RBE) volume metric." },
+    "peds-proton-brainstem-2026-brain-1": { "automatedEvaluation": false, "_why": "Gy(RBE); volume statement." },
+    "nash-2025-cord-brainstem-audit-spinal-cord-1": { "structureOrPRV": "PRV", "alternativeGroup": null, "_why": "Methods: sub-contours created within the organ PRV; maximum dose per sub-contour." },
+    "nash-2025-cord-brainstem-audit-spinal-cord-2": { "structureOrPRV": "PRV" },
+    "nash-2025-cord-brainstem-audit-brainstem-1": { "structureOrPRV": "PRV" },
+    "ho-2020-npc-sbrt-hyperarc-spinal-cord-1": { "alternativeGroup": "cord" },
+    "ho-2020-npc-sbrt-hyperarc-spinal-cord-2": { "alternativeGroup": "cord" },
+    "ho-2020-npc-sbrt-hyperarc-brainstem-1": { "alternativeGroup": "brainstem" },
+    "ho-2020-npc-sbrt-hyperarc-brainstem-2": { "alternativeGroup": "brainstem" },
+    "ho-2020-npc-sbrt-hyperarc-optic-nerve-1": { "alternativeGroup": "optic-nerve" },
+    "ho-2020-npc-sbrt-hyperarc-optic-nerve-2": { "alternativeGroup": "optic-nerve" },
+    "ho-2020-npc-sbrt-hyperarc-optic-chiasm-1": { "alternativeGroup": "optic-chiasm" },
+    "ho-2020-npc-sbrt-hyperarc-optic-chiasm-2": { "alternativeGroup": "optic-chiasm" },
+    "nanda-2025-hnscc-pet-reirr-spinal-cord-1": { "maxIntervalMonths": 24, "intervalRole": "applicability" },
+    "nanda-2025-hnscc-pet-reirr-spinal-cord-3": { "maxIntervalMonths": 24, "intervalRole": "applicability" },
+    "nanda-2025-hnscc-pet-reirr-spinal-cord-5": { "maxIntervalMonths": 24, "intervalRole": "applicability" },
+    "nanda-2025-hnscc-pet-reirr-spinal-cord-7": { "maxIntervalMonths": 24, "intervalRole": "applicability" },
+    "nanda-2025-hnscc-pet-reirr-brainstem-1": { "maxIntervalMonths": 24, "intervalRole": "applicability" },
+    "nanda-2025-hnscc-pet-reirr-brainstem-3": { "maxIntervalMonths": 24, "intervalRole": "applicability" },
+    "nanda-2025-hnscc-pet-reirr-spinal-cord-2": { "minIntervalMonths": 24, "intervalRole": "applicability" },
+    "nanda-2025-hnscc-pet-reirr-spinal-cord-4": { "minIntervalMonths": 24, "intervalRole": "applicability" },
+    "nanda-2025-hnscc-pet-reirr-spinal-cord-6": { "minIntervalMonths": 24, "intervalRole": "applicability" },
+    "nanda-2025-hnscc-pet-reirr-spinal-cord-8": { "minIntervalMonths": 24, "intervalRole": "applicability" },
+    "nanda-2025-hnscc-pet-reirr-brainstem-2": { "minIntervalMonths": 24, "intervalRole": "applicability" },
+    "nanda-2025-hnscc-pet-reirr-brainstem-4": { "minIntervalMonths": 24, "intervalRole": "applicability" },
+    "paradis-2019-consult-appendixE2-*": {
+      "structureOrPRV": "unspecified",
+      "_why": "The form header ('Dose limit Max to 0.1cc (EQD2)') does not state structure vs PRV; inequality ≤ read from 'Dose limit'."
+    },
+    "paradis-2019-consult-appendixE2-spinal-cord-2": { "conditionText": "Row applies to spinal cord when < 2 mm from target." }
+  },
+  "recoveryModelOverrides": {
+    "paradis-2019-consult-appendixE2-std": {
+      "enabled": true,
+      "pairedSourceKeys": ["paradis-2019-consult-appendixE2"],
+      "organKeys": ["brainstem", "optic-chiasm", "optic-nerve", "spinal-cord", "brachial-plexus", "retina"],
+      "maxPriorCourses": 1,
+      "_why": "Same-source discount table paired only with the same form's limits (recoveryIncludedInLimit=false). The form describes discounting 'previous dose'; extension to several prior courses is not described, so limited to 1."
+    }
+  }
+}

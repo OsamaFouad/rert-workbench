@@ -1,0 +1,306 @@
+[
+ {
+  "maxPriorCourses": null,
+  "appliesTo": "EQD2",
+  "extractionStatus": "verified-fulltext",
+  "notes": "retainedFraction = 1 - discount. Row example: \"Brainstem 2.5 64 0 10 25 50\". Applied to prior EQD2 (D0.1cc) before adding new plan. Institutional consensus, example only.",
+  "id": "paradis-2019-consult-appendixE2-std",
+  "sourceKey": "paradis-2019-consult-appendixE2",
+  "location": "Appendix E2 form",
+  "organ": "bladder, brachial plexus, brainstem, cauda equina, chest wall, colon, esophagus, great vessels, heart, optic chiasm, optic nerve, rectum, retina, sacral plexus, spinal cord (incl. <2 mm from target), trachea/bronchus",
+  "setting": "any-site institutional reRT consult (Univ. Michigan)",
+  "intervalRule": "Previous dose discount (%) by time since prior course: <3 mo 0, 3-6 mo 10, 6 mo-1 yr 25, 1-3 yrs 50; \"For >3 years, 50% discount suggested\"",
+  "factorTable": [
+   {
+    "intervalMonthsMin": 0,
+    "intervalMonthsMax": 3,
+    "retainedFraction": 1.0
+   },
+   {
+    "intervalMonthsMin": 3,
+    "intervalMonthsMax": 6,
+    "retainedFraction": 0.9
+   },
+   {
+    "intervalMonthsMin": 6,
+    "intervalMonthsMax": 12,
+    "retainedFraction": 0.75
+   },
+   {
+    "intervalMonthsMin": 12,
+    "intervalMonthsMax": 36,
+    "retainedFraction": 0.5
+   },
+   {
+    "intervalMonthsMin": 36,
+    "intervalMonthsMax": null,
+    "retainedFraction": 0.5
+   }
+  ],
+  "quote": "For >3 years, 50% discount suggested"
+ },
+ {
+  "maxPriorCourses": null,
+  "appliesTo": "EQD2",
+  "extractionStatus": "verified-fulltext",
+  "notes": ">3 yr not specified per-row.",
+  "id": "paradis-2019-consult-appendixE2-duodenum",
+  "sourceKey": "paradis-2019-consult-appendixE2",
+  "location": "Appendix E2 form",
+  "organ": "duodenum",
+  "setting": "institutional",
+  "intervalRule": "<3 mo 0, 3-6 mo 0, 6 mo-1 yr 10, 1-3 yrs 25 (>3 yr: form header suggests 50%)",
+  "factorTable": [
+   {
+    "intervalMonthsMin": 0,
+    "intervalMonthsMax": 3,
+    "retainedFraction": 1.0
+   },
+   {
+    "intervalMonthsMin": 3,
+    "intervalMonthsMax": 6,
+    "retainedFraction": 1.0
+   },
+   {
+    "intervalMonthsMin": 6,
+    "intervalMonthsMax": 12,
+    "retainedFraction": 0.9
+   },
+   {
+    "intervalMonthsMin": 12,
+    "intervalMonthsMax": 36,
+    "retainedFraction": 0.75
+   }
+  ],
+  "quote": "Duodenum 2.5 54 0 0 10 25"
+ },
+ {
+  "maxPriorCourses": null,
+  "appliesTo": "EQD2",
+  "extractionStatus": "verified-fulltext",
+  "notes": "",
+  "id": "paradis-2019-consult-appendixE2-small-bowel",
+  "sourceKey": "paradis-2019-consult-appendixE2",
+  "location": "Appendix E2 form",
+  "organ": "small-bowel",
+  "setting": "institutional",
+  "intervalRule": "<3 mo 0, 3-6 mo 0, 6 mo-1 yr 25, 1-3 yrs 25",
+  "factorTable": [
+   {
+    "intervalMonthsMin": 0,
+    "intervalMonthsMax": 3,
+    "retainedFraction": 1.0
+   },
+   {
+    "intervalMonthsMin": 3,
+    "intervalMonthsMax": 6,
+    "retainedFraction": 1.0
+   },
+   {
+    "intervalMonthsMin": 6,
+    "intervalMonthsMax": 12,
+    "retainedFraction": 0.75
+   },
+   {
+    "intervalMonthsMin": 12,
+    "intervalMonthsMax": 36,
+    "retainedFraction": 0.75
+   }
+  ],
+  "quote": "Small Bowel 2.5 54 0 0 25 25"
+ },
+ {
+  "maxPriorCourses": null,
+  "appliesTo": "EQD2",
+  "extractionStatus": "verified-fulltext",
+  "notes": "",
+  "id": "paradis-2019-consult-appendixE2-stomach",
+  "sourceKey": "paradis-2019-consult-appendixE2",
+  "location": "Appendix E2 form",
+  "organ": "stomach",
+  "setting": "institutional",
+  "intervalRule": "<3 mo 0, 3-6 mo 0, 6 mo-1 yr 25, 1-3 yrs 25",
+  "factorTable": [
+   {
+    "intervalMonthsMin": 0,
+    "intervalMonthsMax": 3,
+    "retainedFraction": 1.0
+   },
+   {
+    "intervalMonthsMin": 3,
+    "intervalMonthsMax": 6,
+    "retainedFraction": 1.0
+   },
+   {
+    "intervalMonthsMin": 6,
+    "intervalMonthsMax": 12,
+    "retainedFraction": 0.75
+   },
+   {
+    "intervalMonthsMin": 12,
+    "intervalMonthsMax": 36,
+    "retainedFraction": 0.75
+   }
+  ],
+  "quote": "Stomach 2.5 54 0 0 25 25"
+ },
+ {
+  "maxPriorCourses": null,
+  "appliesTo": "EQD2",
+  "extractionStatus": "verified-fulltext",
+  "notes": "100% discount = prior dose fully ignored after 2 years.",
+  "id": "paradis-2019-consult-appendixE2-liver",
+  "sourceKey": "paradis-2019-consult-appendixE2",
+  "location": "Appendix E2 form (second table)",
+  "organ": "liver",
+  "setting": "institutional",
+  "intervalRule": "<3 mo 0, 3-6 mo 0, 6 mo-2 yr 50, >2 yr 100 (limit \"NTCP limited\")",
+  "factorTable": [
+   {
+    "intervalMonthsMin": 0,
+    "intervalMonthsMax": 3,
+    "retainedFraction": 1.0
+   },
+   {
+    "intervalMonthsMin": 3,
+    "intervalMonthsMax": 6,
+    "retainedFraction": 1.0
+   },
+   {
+    "intervalMonthsMin": 6,
+    "intervalMonthsMax": 24,
+    "retainedFraction": 0.5
+   },
+   {
+    "intervalMonthsMin": 24,
+    "intervalMonthsMax": null,
+    "retainedFraction": 0.0
+   }
+  ],
+  "quote": "Liver 2.5 NTCP \nlimited 0 0 50 100"
+ },
+ {
+  "maxPriorCourses": null,
+  "appliesTo": "EQD2",
+  "extractionStatus": "verified-fulltext",
+  "notes": "Appendix E1 text instead states 40% beyond 2 years for lung — internal inconsistency.",
+  "id": "paradis-2019-consult-appendixE2-lungs",
+  "sourceKey": "paradis-2019-consult-appendixE2",
+  "location": "Appendix E2 form (second table)",
+  "organ": "lungs",
+  "setting": "institutional",
+  "intervalRule": "<3 mo 0, 3-6 mo 0, 6 mo-2 yr 25, >2 yr 50 (limit customized per case)",
+  "factorTable": [
+   {
+    "intervalMonthsMin": 0,
+    "intervalMonthsMax": 3,
+    "retainedFraction": 1.0
+   },
+   {
+    "intervalMonthsMin": 3,
+    "intervalMonthsMax": 6,
+    "retainedFraction": 1.0
+   },
+   {
+    "intervalMonthsMin": 6,
+    "intervalMonthsMax": 24,
+    "retainedFraction": 0.75
+   },
+   {
+    "intervalMonthsMin": 24,
+    "intervalMonthsMax": null,
+    "retainedFraction": 0.5
+   }
+  ],
+  "quote": "Lungs 2.5 Customized \nper case 0 0 25 50"
+ },
+ {
+  "maxPriorCourses": null,
+  "appliesTo": "EQD2",
+  "extractionStatus": "verified-fulltext",
+  "notes": "",
+  "id": "paradis-2019-consult-appendixE2-kidneys",
+  "sourceKey": "paradis-2019-consult-appendixE2",
+  "location": "Appendix E2 form",
+  "organ": "kidneys",
+  "setting": "institutional",
+  "intervalRule": "No discount at any interval (limit ALARA)",
+  "factorTable": [
+   {
+    "intervalMonthsMin": 0,
+    "intervalMonthsMax": 3,
+    "retainedFraction": 1.0
+   },
+   {
+    "intervalMonthsMin": 3,
+    "intervalMonthsMax": 6,
+    "retainedFraction": 1.0
+   },
+   {
+    "intervalMonthsMin": 6,
+    "intervalMonthsMax": 12,
+    "retainedFraction": 1.0
+   },
+   {
+    "intervalMonthsMin": 12,
+    "intervalMonthsMax": 36,
+    "retainedFraction": 1.0
+   }
+  ],
+  "quote": "Kidneys 2.5 ALARA 0 0 0 0"
+ },
+ {
+  "maxPriorCourses": null,
+  "appliesTo": "unspecified",
+  "extractionStatus": "verified-fulltext",
+  "notes": "Single-point statement, not a formal model.",
+  "id": "dk-reirr-workflow-2025-spinal-cord",
+  "sourceKey": "dk-reirr-workflow-2025",
+  "location": "Equieffective dose rescaling",
+  "organ": "spinal-cord",
+  "setting": "general reRT",
+  "intervalRule": "at least 6 months between treatments for 25% tissue recovery (literature suggestion; no agreed TRF)",
+  "factorTable": [
+   {
+    "intervalMonthsMin": 6,
+    "intervalMonthsMax": null,
+    "retainedFraction": 0.75
+   }
+  ],
+  "quote": "Some studies suggest at least 6 months between treatments for 25% tissue recovery for the spinal cord"
+ },
+ {
+  "maxPriorCourses": null,
+  "appliesTo": "unspecified",
+  "extractionStatus": "verified-fulltext",
+  "notes": "Background statement; retainedFraction 0.75 is the arithmetic equivalent of a 25% tolerance increase interpreted as a 25% prior-dose discount (interpretation).",
+  "id": "estro-eano-gbm-2025-spinal-cord",
+  "sourceKey": "estro-eano-gbm-2025",
+  "location": "Introduction",
+  "organ": "spinal-cord",
+  "setting": "CNS reRT background",
+  "intervalRule": "cord tolerance increases at least 25% at 6 months after initial course",
+  "factorTable": [
+   {
+    "intervalMonthsMin": 6,
+    "intervalMonthsMax": null,
+    "retainedFraction": 0.75
+   }
+  ],
+  "quote": "cord tolerance appears to increase at least 25 % 6 months after the initial course of RT"
+ },
+ {
+  "maxPriorCourses": null,
+  "appliesTo": "EQD2",
+  "extractionStatus": "verified-fulltext",
+  "notes": "Formula application; 25% example value is illustrative, not recommended.",
+  "id": "phiro-2026-dose-accumulation-strategies-trf",
+  "sourceKey": "phiro-2026-dose-accumulation-strategies",
+  "location": "Materials and methods; Table 1",
+  "organ": "OARs in lung case (example)",
+  "setting": "method demonstration",
+  "intervalRule": "previous equieffective dose x (1 - TRF); 25% TRF used in example (C2 delivered two years after C1)",
+  "factorTable": null,
+  "quote": "EQD2Gy∙(1-TRF) prior to dose summation"
+ }
+]

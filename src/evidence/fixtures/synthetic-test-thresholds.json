@@ -1,0 +1,265 @@
+{
+  "datasetVersion": "fixtures-1.0.0",
+  "searchDate": "n/a",
+  "description": "SOFTWARE TEST FIXTURES ONLY. These thresholds and recovery factors are invented round numbers used to test the calculation engine and to demonstrate scenarios the verified literature dataset cannot yet cover. They are NOT literature values and must never be used for clinical decisions.",
+  "sources": [
+    {
+      "key": "fixture-a",
+      "title": "Synthetic test reference A (not literature)",
+      "authors": "ReRT Workbench test suite",
+      "year": 2026,
+      "journal": "n/a",
+      "doi": "",
+      "url": "",
+      "accessStatus": "synthetic",
+      "accessedDate": "2026-10-29",
+      "scope": "Software test fixture",
+      "evidenceType": "synthetic-test-fixture",
+      "regions": [
+        "brain",
+        "head-neck"
+      ],
+      "notes": "Invented values for software testing.",
+      "isTestFixture": true
+    },
+    {
+      "key": "fixture-b",
+      "title": "Synthetic test reference B (not literature)",
+      "authors": "ReRT Workbench test suite",
+      "year": 2026,
+      "journal": "n/a",
+      "doi": "",
+      "url": "",
+      "accessStatus": "synthetic",
+      "accessedDate": "2026-10-29",
+      "scope": "Software test fixture",
+      "evidenceType": "synthetic-test-fixture",
+      "regions": [
+        "brain",
+        "head-neck"
+      ],
+      "notes": "Invented values for software testing.",
+      "isTestFixture": true
+    }
+  ],
+  "constraints": [
+    {
+      "id": "fixture-a-brainstem-dmax",
+      "sourceKey": "fixture-a",
+      "location": "n/a (synthetic)",
+      "regions": [
+        "brain",
+        "head-neck"
+      ],
+      "organKeys": [
+        "brainstem"
+      ],
+      "structureOrPRV": "unspecified",
+      "metric": "Dmax",
+      "doseQuantity": "EQD2",
+      "unit": "Gy",
+      "inequality": "<=",
+      "threshold": 100,
+      "thresholdText": "100 (synthetic)",
+      "alphaBeta": 2,
+      "alphaBetaSource": "synthetic fixture",
+      "scope": "cumulative",
+      "category": "recommended-limit",
+      "diseaseScope": [
+        "any"
+      ],
+      "setting": "test",
+      "endpoint": "test",
+      "fractionationApplicability": "test",
+      "minIntervalMonths": null,
+      "maxIntervalMonths": null,
+      "intervalRole": "condition",
+      "intervalCondition": "",
+      "alternativeGroup": null,
+      "physicalSumDefinedBySource": false,
+      "conditionText": "",
+      "recoveryAssumption": "",
+      "recoveryIncludedInLimit": false,
+      "evidenceType": "synthetic-test-fixture",
+      "limitations": "Not literature.",
+      "extractionStatus": "synthetic-test-fixture",
+      "automatedEvaluation": true,
+      "quote": null,
+      "notes": "",
+      "isTestFixture": true
+    },
+    {
+      "id": "fixture-b-brainstem-dmax",
+      "sourceKey": "fixture-b",
+      "location": "n/a (synthetic)",
+      "regions": [
+        "brain",
+        "head-neck"
+      ],
+      "organKeys": [
+        "brainstem"
+      ],
+      "structureOrPRV": "unspecified",
+      "metric": "Dmax",
+      "doseQuantity": "EQD2",
+      "unit": "Gy",
+      "inequality": "<",
+      "threshold": 90,
+      "thresholdText": "90 (synthetic)",
+      "alphaBeta": 3,
+      "alphaBetaSource": "synthetic fixture",
+      "scope": "cumulative",
+      "category": "conditional-limit",
+      "diseaseScope": [
+        "any"
+      ],
+      "setting": "test",
+      "endpoint": "test",
+      "fractionationApplicability": "test",
+      "minIntervalMonths": 6,
+      "maxIntervalMonths": null,
+      "intervalRole": "condition",
+      "intervalCondition": "synthetic: at least 6 months",
+      "alternativeGroup": null,
+      "physicalSumDefinedBySource": false,
+      "conditionText": "",
+      "recoveryAssumption": "synthetic: recovery already included",
+      "recoveryIncludedInLimit": true,
+      "evidenceType": "synthetic-test-fixture",
+      "limitations": "Not literature.",
+      "extractionStatus": "synthetic-test-fixture",
+      "automatedEvaluation": true,
+      "quote": null,
+      "notes": "",
+      "isTestFixture": true
+    },
+    {
+      "id": "fixture-a-spinal-cord-d0.03cc",
+      "sourceKey": "fixture-a",
+      "location": "n/a (synthetic)",
+      "regions": [
+        "head-neck"
+      ],
+      "organKeys": [
+        "spinal-cord"
+      ],
+      "structureOrPRV": "unspecified",
+      "metric": "D0.03cc",
+      "doseQuantity": "EQD2",
+      "unit": "Gy",
+      "inequality": "<=",
+      "threshold": 60,
+      "thresholdText": "60 (synthetic)",
+      "alphaBeta": 2,
+      "alphaBetaSource": "synthetic fixture",
+      "scope": "cumulative",
+      "category": "recommended-limit",
+      "diseaseScope": [
+        "any"
+      ],
+      "setting": "test",
+      "endpoint": "test",
+      "fractionationApplicability": "test",
+      "minIntervalMonths": null,
+      "maxIntervalMonths": null,
+      "intervalRole": "condition",
+      "intervalCondition": "",
+      "alternativeGroup": null,
+      "physicalSumDefinedBySource": false,
+      "conditionText": "",
+      "recoveryAssumption": "",
+      "recoveryIncludedInLimit": false,
+      "evidenceType": "synthetic-test-fixture",
+      "limitations": "Not literature.",
+      "extractionStatus": "synthetic-test-fixture",
+      "automatedEvaluation": true,
+      "quote": null,
+      "notes": "",
+      "isTestFixture": true
+    },
+    {
+      "id": "fixture-a-parotid-dmean",
+      "sourceKey": "fixture-a",
+      "location": "n/a (synthetic)",
+      "regions": [
+        "head-neck"
+      ],
+      "organKeys": [
+        "parotid"
+      ],
+      "structureOrPRV": "unspecified",
+      "metric": "Dmean",
+      "doseQuantity": "EQD2",
+      "unit": "Gy",
+      "inequality": "<=",
+      "threshold": 26,
+      "thresholdText": "26 (synthetic)",
+      "alphaBeta": 3,
+      "alphaBetaSource": "synthetic fixture",
+      "scope": "cumulative",
+      "category": "planning-goal",
+      "diseaseScope": [
+        "any"
+      ],
+      "setting": "test",
+      "endpoint": "test",
+      "fractionationApplicability": "test",
+      "minIntervalMonths": null,
+      "maxIntervalMonths": null,
+      "intervalRole": "condition",
+      "intervalCondition": "",
+      "alternativeGroup": null,
+      "physicalSumDefinedBySource": false,
+      "conditionText": "",
+      "recoveryAssumption": "",
+      "recoveryIncludedInLimit": false,
+      "evidenceType": "synthetic-test-fixture",
+      "limitations": "Not literature.",
+      "extractionStatus": "synthetic-test-fixture",
+      "automatedEvaluation": true,
+      "quote": null,
+      "notes": "",
+      "isTestFixture": true
+    }
+  ],
+  "recoveryModels": [
+    {
+      "id": "fixture-recovery-cord",
+      "sourceKey": "fixture-a",
+      "location": "n/a (synthetic)",
+      "organKeys": [
+        "spinal-cord",
+        "brainstem"
+      ],
+      "setting": "test",
+      "maxPriorCourses": 1,
+      "appliesTo": "EQD2",
+      "factorTable": [
+        {
+          "intervalMonthsMin": 0,
+          "intervalMonthsMax": 6,
+          "retainedFraction": 1.0
+        },
+        {
+          "intervalMonthsMin": 6,
+          "intervalMonthsMax": 12,
+          "retainedFraction": 0.75
+        },
+        {
+          "intervalMonthsMin": 12,
+          "intervalMonthsMax": null,
+          "retainedFraction": 0.5
+        }
+      ],
+      "description": "SYNTHETIC test recovery table. Not a literature model.",
+      "quote": null,
+      "extractionStatus": "synthetic-test-fixture",
+      "isTestFixture": true,
+      "enabled": true,
+      "pairedSourceKeys": [
+        "fixture-a",
+        "fixture-b"
+      ]
+    }
+  ]
+}

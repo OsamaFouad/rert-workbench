@@ -1,0 +1,96 @@
+[
+ {
+  "id": "bots-2017-cord-brainstem-50pct",
+  "sourceKey": "bots-2017-hn-reirr",
+  "location": "Patients and methods",
+  "organ": "spinal-cord; brainstem",
+  "setting": "HN re-RT, photon",
+  "maxPriorCourses": 1,
+  "intervalRule": "A 50% dose tolerance recovery was assumed after a radiotherapy interval of at least 12 months.",
+  "factorTable": [
+   {
+    "intervalMonthsMin": 12,
+    "intervalMonthsMax": null,
+    "retainedFraction": 0.5
+   }
+  ],
+  "appliesTo": "EQD2",
+  "quote": "A 50% dose tolerance recovery was assumed after a radiotherapy interval of at least 12 months.",
+  "extractionStatus": "verified-fulltext",
+  "notes": "Used with a 60 Gy EQD2 cumulative cap. Behaviour for <12 months not stated (no recovery implied but not explicit). Cites Ang 2001 primate data."
+ },
+ {
+  "id": "hague-2024-50pct",
+  "sourceKey": "hague-2024-bjrcr",
+  "location": "Treatment planning / Discussion",
+  "organ": "all OARs incl. spinal cord, brainstem, carotid",
+  "setting": "HN re-RT, 3 oral cavity cases",
+  "maxPriorCourses": 1,
+  "intervalRule": "50% recovery assumed for previous treatment dose, no interval condition stated",
+  "factorTable": [
+   {
+    "intervalMonthsMin": 0,
+    "intervalMonthsMax": null,
+    "retainedFraction": 0.5
+   }
+  ],
+  "appliesTo": "unspecified",
+  "quote": "In all 3 cases discussed here, a 50% dosimetric recovery was assumed for the previous treatment isodoses.",
+  "extractionStatus": "verified-fulltext",
+  "notes": "No interval condition stated (intervalMonthsMin 0 is a placeholder). Applied to physical isodose levels for mean-dose tables and within BED formalism for cord/brainstem. Authors call it possibly over-cautious for carotid."
+ },
+ {
+  "id": "held-2019-cirt-interval-20pct",
+  "sourceKey": "held-2019-cirt-oar",
+  "location": "Discussion / Table 5",
+  "organ": "brainstem; optic chiasm; optic nerves; spinal cord",
+  "setting": "carbon-ion re-RT for recurrent HN",
+  "maxPriorCourses": 1,
+  "intervalRule": "Interval <= 2 years: cumulative tolerance per QUANTEC; interval > 2 years: cumulative tolerance increased by up to 20%",
+  "factorTable": null,
+  "appliesTo": "EQD2",
+  "quote": "However, if the RT interval is more than two years, an increase of the total cumulative dose to OAR by up to 20% has shown acceptable toxicity profiles [20].",
+  "extractionStatus": "verified-fulltext",
+  "notes": "Not a retained-fraction model: it scales the cumulative limit (x1.2) rather than discounting prior dose. Table 5 labels the quantity 'BED2Gy'."
+ },
+ {
+  "id": "tan-2025-npc-70pct",
+  "sourceKey": "tan-2025-npc-dwi-dosepaint",
+  "location": "Methods",
+  "organ": "OARs other than brainstem/spinal cord",
+  "setting": "recurrent NPC re-IMRT",
+  "maxPriorCourses": 1,
+  "intervalRule": "previous irradiated dose with 70% recovery (no interval condition stated)",
+  "factorTable": [
+   {
+    "intervalMonthsMin": 0,
+    "intervalMonthsMax": null,
+    "retainedFraction": 0.3
+   }
+  ],
+  "appliesTo": "unspecified",
+  "quote": "The maximum dose for other OARs were based on TD5/5, considering previous irradiated dose with 70% recovery.",
+  "extractionStatus": "verified-fulltext",
+  "notes": "70% recovery interpreted as 30% of prior dose retained. No interval condition stated (0 is a placeholder)."
+ },
+ {
+  "id": "nash-2025-brainstem-no-recovery",
+  "sourceKey": "nash-2025-cord-brainstem-audit",
+  "location": "Methods 2.2",
+  "organ": "brainstem",
+  "setting": "HN photon re-RT",
+  "maxPriorCourses": 1,
+  "intervalRule": "No recovery assumed for brainstem",
+  "factorTable": [
+   {
+    "intervalMonthsMin": 0,
+    "intervalMonthsMax": null,
+    "retainedFraction": 1.0
+   }
+  ],
+  "appliesTo": "EQD2",
+  "quote": "This was based on standard single-course constraint at Portsmouth Oncology Centre (UK) and assumes no recovery.",
+  "extractionStatus": "verified-fulltext",
+  "notes": "Cord method also subtracts full prior EQD2/2 from a 60 Gy cap (no recovery credited), but this is implicit in eq. (2) rather than stated as a recovery assumption."
+ }
+]
