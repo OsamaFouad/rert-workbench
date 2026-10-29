@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { canonicalMetric, constraintsForOar } from '../../engine';
+import { canonicalMetric, constraintsForOar, suggestReferences } from '../../engine';
 import { EVIDENCE, sourceLabel, sourcesForPathway } from '../../evidence';
 import { ConstraintTags, SourceLink, constraintValueText } from '../components/ConstraintText';
 import type { StepProps } from '../pages/CaseWorkflow';
@@ -9,6 +9,9 @@ export function EvidenceStep({ c, update }: StepProps) {
   const sources = sourcesForPathway(c.pathway, c.includeTestFixtures);
   const selected = sources.filter((s) => c.selectedSourceKeys.includes(s.key));
   const ev = useEvaluation(c);
+  const suggestions = suggestReferences(c, EVIDENCE, sources.map((s) => s.key));
+  const recommended = suggestions.filter((x) => x.recommended).map((x) => x.sourceKey);
+  const POP_TAG = { match: ['ok', 'matches case'], general: ['', 'cross-site'], mismatch: ['warn', 'different population'] } as const;
   const enteredMetrics = (oarId: string) =>
     new Set(
       [...c.courses.flatMap((co) => co.phases.flatMap((p) => p.doses)), ...c.proposed.doses]
@@ -17,6 +20,67 @@ export function EvidenceStep({ c, update }: StepProps) {
     );
   return (
     <>
+      <div className="card" data-testid="suggestions">
+        <h2>Suggested references for this case</h2>
+        <p className="muted small">
+          Ranked by fit to your case: population match, then how many checks your entered data can evaluate, then organs covered.
+          Limit values are <b>not</b> used for ranking, so a reference is never suggested for being more permissive. You decide.
+        </p>
+        {c.disease.diseaseKeys.length === 0 && (
+          <div className="callout warn small">No disease selected in step 1 (New Case), so no reference can match the population. Set it for better suggestions.</div>
+        )}
+        {suggestions.length === 0 ? (
+          <p className="muted">No reference in the dataset has an evaluable limit for this pathway.</p>
+        ) : (
+          <div className="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Reference</th>
+                  <th>Population</th>
+                  <th>Your OARs covered</th>
+                  <th className="num">Evaluable now</th>
+                  <th>To get more checks, enter</th>
+                  <th>Selected</th>
+                </tr>
+              </thead>
+              <tbody>
+                {suggestions.map((x, i) => (
+                  <tr key={x.sourceKey} data-testid={`suggest-${x.sourceKey}`}>
+                    <td className="num">{i + 1}</td>
+                    <td>
+                      <SourceLink sourceKey={x.sourceKey} />
+                      {x.recommended ? <span className="tag ok">suggested</span> : <span className="tag na">not suggested</span>}
+                    </td>
+                    <td><span className={`tag ${POP_TAG[x.population][0]}`}>{POP_TAG[x.population][1]}</span></td>
+                    <td className="small">{x.organsCovered.join(', ') || '—'}</td>
+                    <td className="num">{x.evaluableNow} / {x.checks}</td>
+                    <td className="small">
+                      {x.missingMetrics.length === 0 ? '—' : x.missingMetrics.map((m) => `${m.oarName}: ${m.metrics.join(' or ')}`).join('; ')}
+                    </td>
+                    <td>{c.selectedSourceKeys.includes(x.sourceKey) ? '✓' : ''}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+        <button
+          className="primary"
+          disabled={recommended.length === 0}
+          onClick={() =>
+            update((d) => {
+              d.selectedSourceKeys = recommended;
+              d.primarySourceKey = recommended[0] ?? null;
+            })
+          }
+        >
+          Use suggested references ({recommended.length})
+        </button>{' '}
+        <span className="muted small">Replaces the current selection; the top-ranked one becomes primary. You can still change both below.</span>
+      </div>
+
       <div className="card">
         <h2>Select references</h2>
         <p className="muted small">

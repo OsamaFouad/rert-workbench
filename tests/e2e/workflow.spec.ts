@@ -157,3 +157,14 @@ test('OAR Data: a metric row can be removed, and reference metrics appear as emp
   await page.reload();
   await expect(page.getByLabel(/^Spinal cord PRV D0.03cc Course 1/)).toHaveCount(0);
 });
+
+test('Evidence step suggests references and can apply them', async ({ page }) => {
+  await fresh(page);
+  await page.goto('/#/case/demo-hn-002/evidence');
+  const panel = page.getByTestId('suggestions');
+  await expect(panel.getByTestId('suggest-nash-2025-cord-brainstem-audit')).toContainText('matches case');
+  await expect(panel.getByTestId('suggest-ho-2020-npc-sbrt-hyperarc')).toContainText('different population');
+  await expect(panel.getByTestId('suggest-ho-2020-npc-sbrt-hyperarc')).toContainText('not suggested');
+  await panel.getByRole('button', { name: /Use suggested references/ }).click();
+  await expect(panel.getByTestId('suggest-nash-2025-cord-brainstem-audit')).toContainText('✓');
+});
