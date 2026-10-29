@@ -190,8 +190,8 @@ export function EvidenceStep({ c, update }: StepProps) {
         </div>
       </div>
 
-      <div className="card">
-        <h2>Side-by-side comparison</h2>
+      <details className="card collapsible" data-testid="side-by-side">
+        <summary><h2>Side-by-side comparison</h2> <span className="muted small">({selected.length} reference(s) selected — click to expand)</span></summary>
         {selected.length === 0 && <p className="muted">No reference selected.</p>}
         {c.oars.map((o) => {
           const metrics = enteredMetrics(o.id);
@@ -239,11 +239,11 @@ export function EvidenceStep({ c, update }: StepProps) {
             </div>
           );
         })}
-      </div>
+      </details>
 
       {ev && ev.disagreements.length > 0 && (
-        <div className="card">
-          <h2>Where selected references differ</h2>
+        <details className="card collapsible" data-testid="differences">
+          <summary><h2>Where selected references differ</h2> <span className="muted small">({ev.disagreements.length} difference(s) — click to expand)</span></summary>
           <ul className="reasons">
             {ev.disagreements.map((d, i) => (
               <li key={i}>
@@ -253,7 +253,7 @@ export function EvidenceStep({ c, update }: StepProps) {
               </li>
             ))}
           </ul>
-        </div>
+        </details>
       )}
       <p className="small muted">
         Full extraction details (quotes, limitations, α/β sources) are in the <Link to="/evidence">Evidence Library</Link>.

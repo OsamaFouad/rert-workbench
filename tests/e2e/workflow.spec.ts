@@ -179,3 +179,14 @@ test('Evidence step: select all and clear all references', async ({ page }) => {
   await page.getByRole('button', { name: 'Clear all' }).click();
   for (let i = 0; i < n; i++) await expect(boxes.nth(i)).not.toBeChecked();
 });
+
+test('Evidence step: comparison sections are collapsed and expand on click', async ({ page }) => {
+  await fresh(page);
+  await page.goto('/#/case/demo-hn-002/evidence');
+  for (const id of ['side-by-side', 'differences']) {
+    const sec = page.getByTestId(id);
+    await expect(sec).not.toHaveAttribute('open', '');
+    await sec.locator('summary').click();
+    await expect(sec).toHaveAttribute('open', '');
+  }
+});
