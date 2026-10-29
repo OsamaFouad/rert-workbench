@@ -168,3 +168,14 @@ test('Evidence step suggests references and can apply them', async ({ page }) =>
   await panel.getByRole('button', { name: /Use suggested references/ }).click();
   await expect(panel.getByTestId('suggest-nash-2025-cord-brainstem-audit')).toContainText('✓');
 });
+
+test('Evidence step: select all and clear all references', async ({ page }) => {
+  await fresh(page);
+  await page.goto('/#/case/demo-br-001/evidence');
+  await page.getByRole('button', { name: /^Select all/ }).click();
+  const boxes = page.getByRole('checkbox', { name: /^Use / });
+  const n = await boxes.count();
+  for (let i = 0; i < n; i++) await expect(boxes.nth(i)).toBeChecked();
+  await page.getByRole('button', { name: 'Clear all' }).click();
+  for (let i = 0; i < n; i++) await expect(boxes.nth(i)).not.toBeChecked();
+});

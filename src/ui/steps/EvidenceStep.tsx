@@ -104,6 +104,31 @@ export function EvidenceStep({ c, update }: StepProps) {
           />
           Show synthetic SOFTWARE TEST FIXTURES (not literature)
         </label>
+        <div className="row" style={{ margin: '.4rem 0' }}>
+          <button
+            onClick={() =>
+              update((d) => {
+                d.selectedSourceKeys = sources.map((x) => x.key);
+                if (!d.primarySourceKey || !d.selectedSourceKeys.includes(d.primarySourceKey)) d.primarySourceKey = recommended[0] ?? sources[0]?.key ?? null;
+              })
+            }
+          >
+            Select all ({sources.length})
+          </button>
+          <button
+            onClick={() =>
+              update((d) => {
+                d.selectedSourceKeys = [];
+                d.primarySourceKey = null;
+              })
+            }
+          >
+            Clear all
+          </button>
+          <span className="muted small">
+            Selecting all also adds references for other populations; those checks show “Requires review”, so the case cannot turn all-green.
+          </span>
+        </div>
         <div className="table-wrap">
           <table>
             <thead>
