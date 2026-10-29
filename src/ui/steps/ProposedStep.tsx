@@ -4,6 +4,7 @@ import { DoseGrid } from '../components/DoseGrid';
 import { Field, NumInput } from '../components/Inputs';
 import { ResultsTable } from '../components/ResultsTable';
 import type { StepProps } from '../pages/CaseWorkflow';
+import { noMaximumReason } from '../maxHint';
 import { useEvaluation } from '../useEvaluation';
 
 export function ProposedStep({ c, update }: StepProps) {
@@ -21,6 +22,17 @@ export function ProposedStep({ c, update }: StepProps) {
       (out[r.metric] ??= []).push({ label, doseGy: r.physicalCeiling.doseGy, fractions: r.physicalCeiling.fractions });
     }
     return out;
+  };
+  // Plain render function (not a nested component) so inputs keep focus while typing.
+  const renderCard = (o: (typeof c.oars)[number]) => {
+    const why = noMaximumReason(c, o, ev?.results ?? []);
+    return (
+      <div className="card" key={o.id} data-testid={`proposed-card-${o.id}`}>
+        <b>{o.name}</b> <span className="muted small">({o.designation})</span>
+        <DoseGrid c={c} oar={o} update={update} columns="proposed" ceilings={ceilingsFor(o.id)} />
+        {why && <div className="callout warn small" data-testid={`nomax-${o.id}`}>{why}</div>}
+      </div>
+    );
   };
   return (
     <>
@@ -47,26 +59,14 @@ export function ProposedStep({ c, update }: StepProps) {
         <b> calculated headroom under selected assumptions</b>: the largest physical dose to that metric, in the planned number of fractions,
         that stays within each selected reference. It is not a prescribed or guaranteed-safe dose.
       </div>
-      <div className="grid2">
-        {withPrior.map((o) => (
-          <div className="card" key={o.id}>
-            <b>{o.name}</b> <span className="muted small">({o.designation})</span>
-            <DoseGrid c={c} oar={o} update={update} columns="proposed" ceilings={ceilingsFor(o.id)} />
-          </div>
-        ))}
-      </div>
+      {withPrior.map(renderCard)}
       {withoutPrior.length > 0 && (
         <details className="card">
           <summary>
             {withoutPrior.length} OAR(s) with no previous dose entered ({withoutPrior.map((o) => o.name).join(', ')})
           </summary>
-          <div className="grid2" style={{ marginTop: '.6rem' }}>
-            {withoutPrior.map((o) => (
-              <div className="card" key={o.id}>
-                <b>{o.name}</b> <span className="muted small">({o.designation})</span>
-                <DoseGrid c={c} oar={o} update={update} columns="proposed" ceilings={ceilingsFor(o.id)} />
-              </div>
-            ))}
+          <div style={{ marginTop: '.6rem' }}>
+            {withoutPrior.map(renderCard)}
           </div>
         </details>
       )}

@@ -129,3 +129,18 @@ test('Proposed Plan shows previous doses read-only next to the new-plan inputs',
   // Calculated headroom hint next to the input (LeCompte 2025: 100 − 52 = 48 Gy physical)
   await expect(page.getByTestId('ceiling-br1-bs-Dmax')).toContainText('48.00 Gy');
 });
+
+test('explains when no maximum can be shown because the metric differs from the references', async ({ page }) => {
+  await fresh(page);
+  await page.goto('/#/case/demo-hn-001/proposed');
+  // HN-001 cord PRV was entered as D0.03cc; Nash uses Dmax and Paradis uses D0.1cc
+  await expect(page.getByTestId('nomax-hn1-cordprv')).toContainText('set limits on D0.1cc or Dmax');
+  await expect(page.getByTestId('nomax-hn1-cordprv')).toContainText('D0.03cc');
+  // Typing in a new-plan box keeps focus (cards are not re-mounted)
+  const box = page.getByLabel('Spinal cord PRV D0.03cc proposed');
+  await box.fill('');
+  await box.pressSequentially('15');
+  await expect(box).toHaveValue('15');
+  await page.goto('/#/case/demo-hn-001/oars');
+  await expect(page.getByTestId('needs-hn1-cordprv')).toContainText('D0.1cc, Dmax');
+});

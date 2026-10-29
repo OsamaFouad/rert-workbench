@@ -4,6 +4,7 @@ import { ORGAN_LABELS } from '../../domain/templates';
 import { LITERATURE } from '../../evidence';
 import { DoseGrid } from '../components/DoseGrid';
 import { Field, NumInput } from '../components/Inputs';
+import { referenceMetrics } from '../maxHint';
 import type { StepProps } from '../pages/CaseWorkflow';
 
 export const SUMMATION_LABEL: Record<SummationBasis, string> = {
@@ -70,6 +71,11 @@ export function OarStep({ c, update }: StepProps) {
                 </select>
               </Field>
               <span className="spacer" />
+              {referenceMetrics(c, o).length > 0 && (
+                <span className="small" data-testid={`needs-${o.id}`}>
+                  Selected references use: <b className="mono">{referenceMetrics(c, o).join(', ')}</b>
+                </span>
+              )}
               <span className="small">
                 {cov.evaluable > 0 ? (
                   <span className="tag ok">{cov.evaluable} verified numeric record(s) in dataset</span>
